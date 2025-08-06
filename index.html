@@ -29,21 +29,21 @@
             background-color: #f5f7ff;
             color: var(--dark);
             line-height: 1.6;
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
         h1 {
             text-align: center;
             color: var(--primary);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-weight: 700;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
@@ -51,24 +51,25 @@
             background-color: var(--light);
             border-radius: 10px;
             box-shadow: var(--shadow);
-            padding: 25px;
-            margin-bottom: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
 
         .input-group {
             display: flex;
-            gap: 15px;
-            align-items: center;
+            flex-direction: column;
+            gap: 12px;
         }
 
         label {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             color: var(--dark);
         }
 
         input {
-            flex: 1;
+            width: 100%;
             padding: 12px 15px;
             border: 2px solid #e9ecef;
             border-radius: 8px;
@@ -83,7 +84,7 @@
         }
 
         button {
-            padding: 12px 25px;
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
@@ -94,6 +95,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            width: 100%;
         }
 
         button:hover {
@@ -108,41 +110,46 @@
         #add {
             background-color: var(--success);
             color: white;
+            margin-top: 10px;
         }
 
         #result {
             background-color: var(--primary);
             color: white;
             margin-bottom: 20px;
+        }
+
+        .table-container {
             width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 10px;
+            margin: 15px 0;
         }
 
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 20px 0;
             background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            min-width: 600px; /* Ensures table doesn't get too narrow */
         }
 
         th {
             background-color: var(--primary);
             color: white;
-            padding: 15px;
+            padding: 12px 15px;
             text-align: left;
             font-weight: 600;
-            text-transform: uppercase;
             font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         td {
-            padding: 15px;
+            padding: 12px 15px;
             border-bottom: 1px solid #e9ecef;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
 
         tr:last-child td {
@@ -156,9 +163,11 @@
         .vote-btn {
             background-color: var(--accent);
             color: white;
-            padding: 8px 15px;
+            padding: 8px 12px;
             border-radius: 6px;
             font-weight: 500;
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         .vote-count {
@@ -170,28 +179,51 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .logo {
             font-weight: 700;
             color: var(--primary);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
         }
 
-        @media (max-width: 768px) {
+        #time {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
             .input-group {
-                flex-direction: column;
-                align-items: stretch;
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            input {
+                width: auto;
+                flex: 1;
             }
             
             button {
-                width: 100%;
+                width: auto;
+            }
+            
+            #add {
+                margin-top: 0;
+            }
+            
+            .table-container {
+                overflow-x: visible;
             }
             
             table {
-                display: block;
-                overflow-x: auto;
+                min-width: auto;
             }
         }
     </style>
@@ -228,15 +260,17 @@
         </button>
         
         <div class="card">
-            <table>
-                <tbody id="tb">
-                    <tr>
-                        <th>Candidate</th>
-                        <th>Votes</th>
-                        <th>Action</th>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tbody id="tb">
+                        <tr>
+                            <th>Candidate</th>
+                            <th>Votes</th>
+                            <th>Action</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
