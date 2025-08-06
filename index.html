@@ -4,211 +4,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Digital Voting Machine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #4a6bff;
+            --secondary: #f8f9fa;
+            --accent: #ff6b6b;
+            --dark: #343a40;
+            --light: #ffffff;
+            --success: #28a745;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         h1 {
             text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        table {
-            padding: 0px;
-            margin: auto;
-            border: 1px solid red;
-            margin-top: 50px;
+        .card {
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 30px;
         }
 
-        tr {
-            padding: 10px;
-
-        }
-
-        td {
-            padding: 20px;
-            padding-left: 30px;
-            padding-right: 30px;
-            font-size: 25px;
-            text-align: center;
-            border: 2px solid red;
-            background-color: rgb(255, 223, 78);
-            color: rgb(111, 3, 3);
-            font-weight: 600;
-
-
-
-        }
-
-        th {
-            font-size: 25px;
-            border: 3px solid red;
-            background-color: rgb(255, 223, 78);
-        }
-
-        button {
-            height: 40px;
-            width: 100px;
-            background-color: rgb(184, 6, 6);
-            color: white;
-            font-size: 20px;
-            font-weight: 800;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 3px 3px 4px rgb(91, 89, 89);
-            border-right: 2px solid yellow;
-            border-bottom: 2px solid yellow;
-
-        }
-
-        button:hover {
-            cursor: pointer;
-        }
-
-        button:active {
-            box-shadow: none;
-            transform: translateY(3px);
-        }
-
-        #add {
-            background-color: rgb(1, 213, 47);
+        .input-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
         label {
-            font-size: 20px;
-
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--dark);
         }
 
         input {
-            height: 25px;
-            border-radius: 5px;
-
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
         }
 
-        .input {
-            border: 2px solid;
-            padding: 20px;
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #add {
+            background-color: var(--success);
+            color: white;
+        }
+
+        #result {
+            background-color: var(--primary);
+            color: white;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 1rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .vote-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .vote-count {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .header {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        #result{
-            background-color: blue;
+
+        .logo {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1 class="hed">Digital Voting Machine</h1>
-    <div class="input">
-        <form action="">
-            <label for="name" id="name">Name:</label>
-            <input type="text" name="nme" id="nme">
-        </form>
-        <button id="add" onclick=add()>Add</button>
+    <div class="container">
+        <div class="header">
+            <div class="logo">VoteSecure</div>
+            <div id="time"></div>
+        </div>
+        
+        <h1>Digital Voting Machine</h1>
+        
+        <div class="card">
+            <div class="input-group">
+                <label for="nme">Candidate Name:</label>
+                <input type="text" name="nme" id="nme" placeholder="Enter candidate name">
+                <button id="add" onclick="add()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    Add Candidate
+                </button>
+            </div>
+        </div>
+        
+        <button id="result" onclick="result()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+            </svg>
+            Show Results
+        </button>
+        
+        <div class="card">
+            <table>
+                <tbody id="tb">
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Votes</th>
+                        <th>Action</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-<button id="result" onclick=result()>
-    Result
-</button>
-    <table>
-        <tbody id="tb">
-            <tr>
-                <th>Name</th>
-                <th>Count</th>
-                <th>Vote</th>
-            </tr>
-        </tbody>
-
-        <!-- <tr>
-            <td>Vaibhav</td>
-            <td>0</td>
-            <td><button>Vote</button></td>
-        </tr>
-        <tr>
-            <td>Vaibhav</td>
-            <td>0</td>
-            <td><button>Vote</button></td>
-        </tr>
-        <tr>
-            <td>Vaibhav</td>
-            <td>0</td>
-            <td><button>Vote</button></td> -->
-        </tr>
-    </table>
-
 
     <script>
-        let member=[];
+        let member = [];
     
         function add() {
-            let cnt=0;
+            let cnt = 0;
             let name = document.getElementById("nme").value;
-            console.log("name :" + name);
-            console.log("hellow");
+            if (!name.trim()) {
+                alert("Please enter a candidate name");
+                return;
+            }
+            
+            console.log("name: " + name);
             let table = document.getElementById("tb");
             let row = document.createElement("tr");
             let n = document.createElement("td");
-            let count=document.createElement("td");
-            let btnsec=document.createElement("td");
+            let count = document.createElement("td");
+            count.className = "vote-count";
+            let btnsec = document.createElement("td");
             let btn = document.createElement("button");
-            btn.textContent="Vote";
+            btn.className = "vote-btn";
+            btn.textContent = "Vote";
             btnsec.appendChild(btn);
-            n.textContent=name;
-            count.textContent=cnt;
+            n.textContent = name;
+            count.textContent = cnt;
 
-            // let btn2=document.createElement("button");
-            // btn2.textContent="delete";
-
-           btn.addEventListener("click",()=>{
-                cnt++;
-                count.textContent=cnt;
-                person.count=cnt;
-                console.log("current person :"+person.name+" cnt : "+person.count);
-                
-            }); 
-
-            let person={
-                name:name,
-                count:cnt
+            let person = {
+                name: name,
+                count: cnt
             }
 
-            console.log("fixed person :"+person.name+" cnt : "+person.count);
+            btn.addEventListener("click", () => {
+                cnt++;
+                count.textContent = cnt;
+                person.count = cnt;
+                console.log("current person: " + person.name + " cnt: " + person.count);
+            }); 
 
-            member.push(person)
+            member.push(person);
             console.log(member);
-
 
             row.appendChild(n);
             row.appendChild(count);
             row.appendChild(btnsec);
-            // row.appendChild(btn2);
 
             table.appendChild(row);
-
-            // btn2.addEventListener("click",()=>{
-            //     row.remove();
-            // })
-
-            
-
-
-
-
-
+            document.getElementById("nme").value = "";
         }
 
-       function result()
-       {
-        let max=0;
-        let pos=-1;
-        for(i=0;i<member.length;i++)
-       {
-            if(member[i].count>max)
-            {
-                max=member[i].count;
-                pos=i;
+        function result() {
+            if (member.length === 0) {
+                alert("No candidates added yet!");
+                return;
             }
-       }
+            
+            let max = 0;
+            let pos = -1;
+            let winners = [];
+            
+            for (let i = 0; i < member.length; i++) {
+                if (member[i].count > max) {
+                    max = member[i].count;
+                    winners = [member[i].name];
+                } else if (member[i].count === max) {
+                    winners.push(member[i].name);
+                }
+            }
+            
+            if (winners.length > 1) {
+                alert("It's a tie between: " + winners.join(", "));
+            } else {
+                alert("Winner is: " + winners[0] + " with " + max + " votes!");
+            }
+        }
 
-       alert("Winner is : "+member[pos].name);
-       max=0;
-       }
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+            const dateStr = now.toLocaleDateString();
+            document.getElementById('time').textContent = `${dateStr} | ${timeStr}`;
+        }
+        
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 
