@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            padding: 0px;
+            margin: auto;
+            border: 1px solid red;
+            margin-top: 50px;
+        }
+
+        tr {
+            padding: 10px;
+
+        }
+
+        td {
+            padding: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-size: 25px;
+            text-align: center;
+            border: 2px solid red;
+            background-color: rgb(255, 223, 78);
+            color: rgb(111, 3, 3);
+            font-weight: 600;
+
+
+
+        }
+
+        th {
+            font-size: 25px;
+            border: 3px solid red;
+            background-color: rgb(255, 223, 78);
+        }
+
+        button {
+            height: 40px;
+            width: 100px;
+            background-color: rgb(184, 6, 6);
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 3px 3px 4px rgb(91, 89, 89);
+            border-right: 2px solid yellow;
+            border-bottom: 2px solid yellow;
+
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        button:active {
+            box-shadow: none;
+            transform: translateY(3px);
+        }
+
+        #add {
+            background-color: rgb(1, 213, 47);
+        }
+
+        label {
+            font-size: 20px;
+
+        }
+
+        input {
+            height: 25px;
+            border-radius: 5px;
+
+        }
+
+        .input {
+            border: 2px solid;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        #result{
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="hed">Digital Voting Machine</h1>
+    <div class="input">
+        <form action="">
+            <label for="name" id="name">Name:</label>
+            <input type="text" name="nme" id="nme">
+        </form>
+        <button id="add" onclick=add()>Add</button>
+    </div>
+<button id="result" onclick=result()>
+    Result
+</button>
+    <table>
+        <tbody id="tb">
+            <tr>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Vote</th>
+            </tr>
+        </tbody>
+
+        <!-- <tr>
+            <td>Vaibhav</td>
+            <td>0</td>
+            <td><button>Vote</button></td>
+        </tr>
+        <tr>
+            <td>Vaibhav</td>
+            <td>0</td>
+            <td><button>Vote</button></td>
+        </tr>
+        <tr>
+            <td>Vaibhav</td>
+            <td>0</td>
+            <td><button>Vote</button></td> -->
+        </tr>
+    </table>
+
+
+    <script>
+        let member=[];
+    
+        function add() {
+            let cnt=0;
+            let name = document.getElementById("nme").value;
+            console.log("name :" + name);
+            console.log("hellow");
+            let table = document.getElementById("tb");
+            let row = document.createElement("tr");
+            let n = document.createElement("td");
+            let count=document.createElement("td");
+            let btnsec=document.createElement("td");
+            let btn = document.createElement("button");
+            btn.textContent="Vote";
+            btnsec.appendChild(btn);
+            n.textContent=name;
+            count.textContent=cnt;
+
+            // let btn2=document.createElement("button");
+            // btn2.textContent="delete";
+
+           btn.addEventListener("click",()=>{
+                cnt++;
+                count.textContent=cnt;
+                person.count=cnt;
+                console.log("current person :"+person.name+" cnt : "+person.count);
+                
+            }); 
+
+            let person={
+                name:name,
+                count:cnt
+            }
+
+            console.log("fixed person :"+person.name+" cnt : "+person.count);
+
+            member.push(person)
+            console.log(member);
+
+
+            row.appendChild(n);
+            row.appendChild(count);
+            row.appendChild(btnsec);
+            // row.appendChild(btn2);
+
+            table.appendChild(row);
+
+            // btn2.addEventListener("click",()=>{
+            //     row.remove();
+            // })
+
+            
+
+
+
+
+
+        }
+
+       function result()
+       {
+        let max=0;
+        let pos=-1;
+        for(i=0;i<member.length;i++)
+       {
+            if(member[i].count>max)
+            {
+                max=member[i].count;
+                pos=i;
+            }
+       }
+
+       alert("Winner is : "+member[pos].name);
+       max=0;
+       }
+    </script>
+</body>
+
+</html>
